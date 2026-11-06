@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HELISKYDIVE</title>
 <link rel="icon" type="image/png" href="media/shield-sm.png">
-<meta name="description" content="Helicopter skydiving over the Romanian Carpathians, flown with Heli Ski Romania. Fun jumps for licensed skydivers, tandem from 2027, and mountain stays around the jump.">
+<meta name="description" content="Helicopter skydiving over the Romanian Carpathians, flown with Heli Ski Romania. Fun jumps for licensed skydivers, tandem jumps with no experience needed, and mountain stays around the jump.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;800;900&family=Instrument+Sans:wght@400;500;600&family=Inter:wght@200;900&display=swap" rel="stylesheet">
@@ -353,7 +353,7 @@ dialog.admin::backdrop{background:rgba(14,38,25,.75)}
       </a>
       <a class="way" href="#wishlist" data-pick="tandem">
         <img src="media/canopy.jpg" alt="An open parachute canopy against a blue sky" loading="lazy">
-        <span class="tag soon">Starting 2027, waitlist open</span>
+        <span class="tag soon">From the first event, March 2027</span>
         <h3>Tandem</h3>
         <p>Never jumped before? You'll be strapped to an experienced tandem skydiver who handles everything. You just look down.</p>
         <ul>
@@ -361,7 +361,7 @@ dialog.admin::backdrop{background:rgba(14,38,25,.75)}
           <li>Freefall and canopy ride with your tandem pilot</li>
           <li>Filmed start to finish: two camera flyers in the air, edited photos and video</li>
         </ul>
-        <span class="btn">Join the tandem waitlist</span>
+        <span class="btn">Join the wishlist for tandem</span>
       </a>
     </div>
   </div>
@@ -498,8 +498,8 @@ dialog.admin::backdrop{background:rgba(14,38,25,.75)}
         <legend>What would you like to do?</legend>
         <label class="opt"><input type="checkbox" value="yes" name="funjump"><span>Fun jump<small>Licensed skydivers</small></span><span class="qty">Jumps <input type="number" name="funjumpCount" min="1" max="99" value="1" aria-label="Number of fun jumps"></span></label>
         <label class="opt"><input type="checkbox" value="yes" name="funjumpStay"><span>Fun jump + 1-night stay<small>Licensed skydivers</small></span><span class="qty">Jumps <input type="number" name="funjumpStayCount" min="1" max="99" value="1" aria-label="Number of fun jumps with stay"></span></label>
-        <label class="opt"><input type="checkbox" value="yes" name="tandem"><span>Tandem<small>No experience needed, from 2027</small></span><span></span></label>
-        <label class="opt"><input type="checkbox" value="yes" name="tandemStay"><span>Tandem + 1-night stay<small>No experience needed, from 2027</small></span><span></span></label>
+        <label class="opt"><input type="checkbox" value="yes" name="tandem"><span>Tandem<small>No experience needed</small></span><span></span></label>
+        <label class="opt"><input type="checkbox" value="yes" name="tandemStay"><span>Tandem + 1-night stay<small>No experience needed</small></span><span></span></label>
         <label class="opt"><input type="checkbox" value="yes" name="companionFlight"><span>Companion, helicopter flight<small>Flies along and watches you jump</small></span><span class="qty">People <input type="number" name="companionFlights" min="1" max="20" value="1" aria-label="Number of companions on the flight"></span></label>
         <label class="opt"><input type="checkbox" value="yes" name="companion"><span>Companion, 1-night stay<small>For someone who comes along but doesn't jump</small></span><span class="qty">People <input type="number" name="companions" min="1" max="20" value="1" aria-label="Number of companions"></span></label>
       </fieldset>
@@ -556,10 +556,11 @@ var ADMIN_HASH='5cac0a318669fadfee734fb340a5f5b70b428ac57a9f4b109cb6e150b2ba7e57
 
 /* Evenimente: editați lista de aici */
 var EVENTS=[
-  {date:'2027-05-15', end:'2027-05-16', title:'Avrig heli jump weekend', place:'Avrig, Făgăraș foothills', kinds:['Fun jump','Stays'], spots:8},
-  {date:'2027-06-19', end:'2027-06-22', title:'Piatra Craiului expedition', place:'Piatra Craiului', kinds:['Fun jump','3 nights'], spots:6},
-  {date:'2027-07-24', end:'2027-07-25', title:'First tandem weekend', place:'Avrig', kinds:['Tandem','Wishlist first'], spots:10},
-  {date:'2027-09-11', end:'2027-09-14', title:'New zone: autumn ridges', place:'Location revealed to participants', kinds:['Fun jump','3 nights'], spots:6}
+  {date:'2027-03-27', end:'2027-03-28', title:'Season opener: Avrig', place:'Avrig, Făgăraș foothills', kinds:['Fun jump','Tandem','Stays']},
+  {date:'2027-05-15', end:'2027-05-16', title:'Avrig heli jump weekend', place:'Avrig, Făgăraș foothills', kinds:['Fun jump','Tandem','Stays'], spots:8},
+  {date:'2027-06-19', end:'2027-06-22', title:'Piatra Craiului expedition', place:'Piatra Craiului', kinds:['Fun jump','Tandem','3 nights'], spots:6},
+  {date:'2027-07-24', end:'2027-07-25', title:'Avrig summer weekend', place:'Avrig', kinds:['Fun jump','Tandem'], spots:10},
+  {date:'2027-09-11', end:'2027-09-14', title:'New zone: autumn ridges', place:'Location revealed to participants', kinds:['Fun jump','Tandem','3 nights'], spots:6}
 ];
 
 (function(){
@@ -574,7 +575,7 @@ var EVENTS=[
     var li=document.createElement('li');li.className='event';
     li.innerHTML='<time datetime="'+e.date+'">'+range+'<small>'+a.y+'</small></time><div><h3></h3><p></p><div class="kinds"></div></div><div class="right"><span class="left"></span><a class="btn" href="#wishlist">Put my name down</a></div>';
     li.querySelector('h3').textContent=e.title; li.querySelector('p').textContent=e.place;
-    li.querySelector('.left').textContent=e.spots+' places';
+    if(e.spots)li.querySelector('.left').textContent=e.spots+' places';
     e.kinds.forEach(function(k){var s=document.createElement('span');s.textContent=k;li.querySelector('.kinds').appendChild(s)});
     li.querySelector('.btn').addEventListener('click',function(){sel.value=label});
     list.appendChild(li);
