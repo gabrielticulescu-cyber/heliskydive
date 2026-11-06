@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HELISKYDIVE</title>
+<meta name="description" content="Helicopter skydiving over the Romanian Carpathians, flown with Heli Ski Romania. Fun jumps for licensed skydivers, tandem from 2027, and mountain stays around the jump.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;800;900&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fir:#0E2619;
+  --moss:#2F4A3A;
+  --snow:#F4F7F7;
+  --mist:#C9D3D0;
+  --stone:#E2E4DE;
+  --canopy:#E8197D;
+  --canopy-soft:#FF7FB5;
+  --ink:#0E2619;
+  --bg:var(--snow);
+  --display:"Big Shoulders Display", "Arial Narrow", sans-serif;
+  --text:"Instrument Sans", system-ui, sans-serif;
+  --gutter:clamp(16px,4vw,56px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#0E2619; --ink:#F4F7F7; }
+}
+:root[data-theme="dark"]{ --bg:#0E2619; --ink:#F4F7F7; }
+
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--canopy);outline-offset:3px}
+[hidden]{display:none!important}
+
+/* ---------- logo ---------- */
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:inherit}
+.logo svg{width:40px;height:34px;flex:none}
+.logo .word{display:grid;line-height:1}
+.logo b{font:900 1.55rem/.9 var(--display);letter-spacing:.02em}
+.logo small{font:600 .62rem/1 var(--text);letter-spacing:.42em;color:var(--canopy-soft);margin-top:3px}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px var(--gutter);color:#fff;transition:background .3s}
+.nav.solid{background:rgba(14,38,25,.92);backdrop-filter:blur(8px)}
+.nav ul{display:flex;gap:26px;list-style:none;padding:0;font-weight:500;font-size:.95rem}
+.nav ul a{text-decoration:none;opacity:.85}
+.nav ul a:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;background:var(--canopy);color:#fff;border:0;padding:.95rem 1.5rem;font:600 1rem/1 var(--text);text-decoration:none;border-radius:999px;cursor:pointer;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn:disabled{opacity:.6;cursor:wait;transform:none}
+.btn.ghost{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.nav .btn{padding:.7rem 1.1rem;font-size:.9rem}
+.nav .short{display:none}
+@media (max-width:900px){.nav ul{display:none}}
+@media (max-width:480px){.nav .long{display:none}.nav .short{display:inline}}
+
+/* ---------- altimeter (signature) ---------- */
+.alti{position:fixed;right:var(--gutter);top:50%;transform:translateY(-50%);z-index:15;display:flex;align-items:center;gap:14px;color:#fff;pointer-events:none;mix-blend-mode:difference}
+.alti-track{width:2px;height:42vh;background:rgba(255,255,255,.35);position:relative}
+.alti-dot{position:absolute;left:50%;width:12px;height:12px;border-radius:50%;background:#fff;transform:translate(-50%,-50%);top:0}
+.alti-read{font:800 2.4rem/1 var(--display);font-variant-numeric:tabular-nums;text-align:right;min-width:4.2ch}
+.alti-read small{display:block;font:500 .8rem/1.3 var(--text);opacity:.8;margin-top:4px}
+@media (max-width:820px){.alti{top:auto;bottom:16px;transform:none;right:16px}.alti-track{display:none}.alti-read{font-size:1.6rem}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;height:100svh;min-height:600px;color:#fff;overflow:hidden;background:#123 url(media/poster.jpg) center/cover}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,38,25,.35) 0%,rgba(14,38,25,0) 35%,rgba(14,38,25,.15) 60%,rgba(14,38,25,.85) 100%)}
+.hero-inner{position:absolute;z-index:2;left:var(--gutter);right:var(--gutter);bottom:clamp(40px,8vh,90px)}
+.hero h1{font:900 clamp(3rem,12.5vw,13rem)/.82 var(--display);text-transform:uppercase;letter-spacing:-.01em;max-width:11ch}
+.hero h1 span{display:block}
+.hero p{max-width:34rem;margin:1.6rem 0 2rem;font-size:clamp(1.05rem,1.6vw,1.3rem);line-height:1.5}
+.hero .actions{display:flex;gap:12px;flex-wrap:wrap}
+.drop-in span{display:block;transform:translateY(-110%);opacity:0;animation:drop .9s cubic-bezier(.2,.8,.2,1) forwards}
+.drop-in span:nth-child(2){animation-delay:.15s}
+.drop-in span:nth-child(3){animation-delay:.3s}
+@keyframes drop{to{transform:none;opacity:1}}
+
+/* ---------- section shell ---------- */
+section{padding:clamp(80px,12vw,160px) var(--gutter);position:relative}
+.wrap{max-width:1280px;margin:0 auto;padding-right:clamp(0px,7vw,110px)}
+h2{font:900 clamp(2.8rem,7vw,6.5rem)/.9 var(--display);text-transform:uppercase;letter-spacing:-.005em}
+h3{font:800 clamp(1.8rem,3vw,2.6rem)/1 var(--display);text-transform:uppercase}
+.lede{font-size:clamp(1.15rem,1.8vw,1.4rem);line-height:1.55;max-width:38rem}
+.head{display:flex;justify-content:space-between;align-items:end;gap:32px;flex-wrap:wrap;margin-bottom:clamp(40px,6vw,72px)}
+.head .lede{max-width:30rem}
+
+/* ---------- expedition ---------- */
+.expedition .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,6vw,90px);align-items:center}
+.expedition figure img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:4px}
+.expedition figcaption{font-size:.9rem;opacity:.7;margin-top:.7rem}
+.expedition .lede{margin:1.8rem 0}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:2.5rem;padding-top:1.5rem;border-top:2px solid currentColor}
+.facts b{display:block;font:800 2.6rem/1 var(--display)}
+.facts span{font-size:.9rem;opacity:.8}
+@media (max-width:820px){.expedition .wrap{grid-template-columns:1fr}.expedition figure{order:-1}.expedition figure img{aspect-ratio:4/3}}
+
+/* ---------- two ways ---------- */
+.ways{background:var(--fir);color:var(--snow)}
+.ways h2{margin-bottom:clamp(40px,6vw,72px)}
+.ways-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.way{position:relative;min-height:min(78vh,720px);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(24px,3.5vw,48px);overflow:hidden;color:#fff;text-decoration:none}
+.way img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.way:hover img{transform:scale(1.04)}
+.way::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(14,38,25,0) 30%,rgba(14,38,25,.92) 100%)}
+.way>*:not(img){position:relative;z-index:2}
+.way h3{font-size:clamp(2.6rem,5vw,4.5rem)}
+.way .btn{align-self:flex-start}
+.way p{max-width:28rem;margin:.8rem 0 1.4rem}
+.way ul{list-style:none;padding:0;margin-bottom:1.6rem;display:grid;gap:.35rem}
+.way li::before{content:"";display:inline-block;width:8px;height:8px;background:var(--canopy);border-radius:50%;margin-right:.7rem;vertical-align:middle}
+.tag{align-self:flex-start;background:#fff;color:var(--fir);font-weight:600;font-size:.85rem;padding:.35rem .8rem;border-radius:999px;margin-bottom:1rem}
+.tag.soon{background:var(--canopy);color:#fff}
+@media (max-width:820px){.ways-grid{grid-template-columns:1fr}.way{min-height:560px}}
+
+/* ---------- zones ---------- */
+.zone-list{list-style:none;padding:0;border-top:2px solid currentColor}
+.zone{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;gap:24px;align-items:center;padding:clamp(20px,2.6vw,32px) 0;border-bottom:1px solid color-mix(in srgb,currentColor 25%,transparent)}
+.zone h3{font-size:clamp(2.2rem,4.5vw,3.8rem)}
+.zone p{opacity:.85}
+.zone .state{font-weight:600;font-size:.9rem;white-space:nowrap}
+.zone .state.flown{color:var(--moss)}
+.zone .state.scout{color:var(--canopy)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .zone .state.flown{color:var(--mist)}}
+:root[data-theme="dark"] .zone .state.flown{color:var(--mist)}
+@media (max-width:700px){.zone{grid-template-columns:1fr;gap:6px}}
+
+/* ---------- events ---------- */
+.events{background:var(--fir);color:var(--snow)}
+.event-list{list-style:none;padding:0;border-top:2px solid var(--snow)}
+.event{display:grid;grid-template-columns:minmax(10rem,auto) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(20px,2.6vw,30px) 0;border-bottom:1px solid rgba(244,247,247,.25)}
+.event time{font:900 clamp(2.4rem,4vw,3.4rem)/.9 var(--display);text-transform:uppercase;white-space:nowrap}
+.event time small{display:block;font:500 .9rem/1.3 var(--text);text-transform:none;opacity:.75;margin-top:6px}
+.event h3{font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:.35rem}
+.event p{opacity:.85}
+.event .kinds{display:flex;gap:8px;flex-wrap:wrap;margin-top:.7rem}
+.event .kinds span{font-size:.82rem;font-weight:600;padding:.25rem .7rem;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(244,247,247,.5)}
+.event .right{text-align:right}
+.event .left{display:block;font-weight:600;margin-bottom:.6rem;color:var(--canopy-soft)}
+@media (max-width:760px){.event{grid-template-columns:1fr}.event .right{text-align:left}}
+
+/* ---------- trip ---------- */
+.trip{background:var(--stone);color:var(--fir);overflow:hidden}
+.trip .wrap.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,90px)}
+.trip .intro .lede{margin:1.6rem 0 2.2rem}
+.trip .intro img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:4px}
+.days{list-style:none;padding:0;counter-reset:day}
+.days li{counter-increment:day;display:grid;grid-template-columns:4.5rem 1fr;gap:16px;padding:22px 0;border-top:1px solid rgba(14,38,25,.25)}
+.days li::before{color:var(--canopy);content:"Day " counter(day);font:800 1.4rem/1.1 var(--display);text-transform:uppercase}
+.days h4{font:600 1.15rem/1.3 var(--text);margin-bottom:.3rem}
+.days p{opacity:.9;font-size:1rem}
+.trip h3{font-size:clamp(2.4rem,4.5vw,3.8rem);margin-bottom:1rem}
+.included{margin-top:clamp(56px,8vw,96px)}
+.included ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:1.4rem;border-top:2px solid var(--fir);padding-top:1.4rem}
+.included b{display:block;font:800 1.7rem/1 var(--display);text-transform:uppercase;margin-bottom:.5rem}
+.included li{font-size:.98rem}
+.note{margin-top:1.4rem;opacity:.85;font-size:.95rem}
+.formats{margin-top:clamp(56px,8vw,96px)}
+.format-list{list-style:none;padding:0;border-top:2px solid var(--fir)}
+.format-list li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) auto;gap:24px;align-items:baseline;padding:18px 0;border-bottom:1px solid rgba(14,38,25,.25)}
+.format-list b{font:800 clamp(1.5rem,2.4vw,2rem)/1.05 var(--display);text-transform:uppercase}
+.format-list .who{font-weight:600;font-size:.9rem;color:var(--canopy);white-space:nowrap}
+.formats .btn{margin-top:2rem}
+@media (max-width:900px){.trip .wrap.split{grid-template-columns:1fr}.included ul{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.included ul{grid-template-columns:1fr}.format-list li{grid-template-columns:1fr;gap:4px}}
+
+/* ---------- partner ---------- */
+.partner{background:var(--fir);color:var(--snow)}
+.partner .wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(32px,6vw,90px);align-items:start}
+.partner img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:4px}
+.partner .lede{margin:1.6rem 0}
+.partner .facts{border-color:var(--snow)}
+.partner .facts b{color:var(--canopy-soft)}
+.seasons{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:2.4rem 0}
+.seasons h4{font:800 1.5rem/1 var(--display);text-transform:uppercase;margin-bottom:.4rem}
+.seasons p{opacity:.85;font-size:.98rem}
+.crew-list{display:grid;gap:18px;margin:2.4rem 0;padding-top:1.6rem;border-top:1px solid rgba(244,247,247,.25)}
+.crew-list dt{font:800 1.4rem/1.1 var(--display);text-transform:uppercase}
+.crew-list dd{opacity:.85}
+@media (max-width:820px){.partner .wrap{grid-template-columns:1fr}.partner img{aspect-ratio:4/3}.seasons{grid-template-columns:1fr}}
+
+/* ---------- how + faq ---------- */
+.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:20px;counter-reset:s}
+.steps li{counter-increment:s;padding-top:1rem;border-top:2px solid currentColor}
+.steps li::before{content:counter(s);display:block;font:900 3.2rem/1 var(--display);color:var(--canopy);margin-bottom:.6rem}
+.steps h4{font:600 1.1rem/1.3 var(--text);margin-bottom:.3rem}
+.steps p{font-size:.97rem;opacity:.85}
+@media (max-width:1000px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.steps{grid-template-columns:1fr}}
+.faq{margin-top:clamp(72px,10vw,130px)}
+.faq h2{margin-bottom:clamp(28px,4vw,48px)}
+.faq details{border-top:1px solid color-mix(in srgb,currentColor 25%,transparent);padding:20px 0}
+.faq details:last-child{border-bottom:1px solid color-mix(in srgb,currentColor 25%,transparent)}
+.faq summary{cursor:pointer;font:800 clamp(1.4rem,2.4vw,2rem)/1.1 var(--display);text-transform:uppercase;list-style:none;display:flex;justify-content:space-between;gap:20px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--canopy);font-size:1.6em;line-height:.7}
+.faq details[open] summary::after{content:"–"}
+.faq details p{max-width:44rem;margin-top:.8rem;opacity:.9}
+
+/* ---------- wishlist ---------- */
+.wish{background:var(--fir);color:var(--snow);padding-bottom:clamp(60px,8vw,100px)}
+.wish .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(32px,6vw,90px)}
+.wish .lede{margin-top:1.4rem}
+.wish aside p{margin-top:1rem;opacity:.85}
+.wish aside a{color:#fff;font-weight:600}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form label{display:grid;gap:6px;font-weight:500;font-size:.95rem}
+.form .full{grid-column:1/-1}
+.form input,.form select,.form textarea{font:inherit;color:inherit;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:.75rem .9rem;width:100%}
+.form select option{color:#000}
+.form textarea{min-height:96px;resize:vertical}
+.form fieldset{grid-column:1/-1;border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:8px 18px 14px}
+.form legend{font-weight:600;padding:0 6px}
+.opt{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);font-weight:500}
+.opt:last-of-type{border-bottom:0}
+.opt input[type=checkbox]{width:20px;height:20px;accent-color:var(--canopy);padding:0}
+.opt small{display:block;font-weight:400;opacity:.75;font-size:.85rem}
+.opt .qty{display:flex;align-items:center;gap:8px;font-size:.85rem;opacity:.9}
+.opt .qty input{width:4.5rem;padding:.45rem .6rem;text-align:center}
+.consent{grid-column:1/-1;display:flex!important;grid-template-columns:none;align-items:flex-start;gap:12px!important;font-weight:400!important;font-size:.9rem!important;opacity:.9}
+.consent input{width:20px!important;height:20px;flex:none;accent-color:var(--canopy);margin-top:2px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form .btn{grid-column:1/-1;justify-self:start}
+.status{grid-column:1/-1;font-weight:600;min-height:1.4em}
+.status.err{color:var(--canopy-soft)}
+@media (max-width:860px){.wish .wrap{grid-template-columns:1fr}.form{grid-template-columns:1fr}}
+
+/* ---------- footer ---------- */
+footer{background:var(--fir);color:var(--mist);padding:40px var(--gutter);border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:.9rem}
+footer .logo{color:var(--snow)}
+footer .logo b{font-size:2rem}
+.foot-right{display:flex;align-items:center;gap:18px}
+.lock{background:none;border:0;color:inherit;opacity:.28;cursor:pointer;padding:6px;line-height:0;border-radius:6px}
+.lock:hover,.lock:focus-visible{opacity:.8}
+.lock svg{width:16px;height:16px}
+
+/* ---------- team area (admin) ---------- */
+dialog.admin{border:0;padding:0;width:min(1200px,96vw);max-height:92vh;border-radius:10px;background:var(--snow);color:var(--fir)}
+dialog.admin::backdrop{background:rgba(14,38,25,.75)}
+.admin-in{padding:clamp(18px,3vw,32px);display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+#adminBody{display:grid;gap:18px;min-width:0}
+#adminBody[hidden]{display:none}
+.admin-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.admin h2{font-size:clamp(2rem,4vw,3rem)}
+.admin .x{background:none;border:0;font-size:2rem;line-height:1;cursor:pointer;color:inherit}
+.admin .login{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.admin input,.admin select,.admin textarea{font:inherit;color:inherit;background:#fff;border:1px solid #b9c2be;border-radius:6px;padding:.6rem .75rem}
+.admin .login input{width:12rem}
+.admin .demo{background:#fff4f9;border:1px solid var(--canopy);padding:10px 14px;border-radius:6px;font-size:.92rem}
+.admin .stats{display:flex;gap:28px;flex-wrap:wrap}
+.admin .stats b{display:block;font:900 2.2rem/1 var(--display);color:var(--canopy)}
+.admin .stats span{font-size:.85rem;opacity:.8}
+.admin .tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.admin .tools .btn{padding:.65rem 1rem;font-size:.9rem}
+.admin .tools input{flex:1;min-width:12rem}
+.tbl-wrap{overflow:auto;max-height:46vh;border:1px solid #d3d9d6;border-radius:6px;background:#fff}
+.admin table{border-collapse:collapse;width:100%;font-size:.88rem}
+.admin th,.admin td{text-align:left;padding:8px 10px;border-bottom:1px solid #e6eae8;white-space:nowrap;vertical-align:top}
+.admin th{position:sticky;top:0;background:var(--stone);font-weight:600}
+.admin td.msg{white-space:normal;min-width:14rem}
+.admin .del{background:none;border:0;color:#b0124f;cursor:pointer;font:inherit;text-decoration:underline}
+.admin details summary{cursor:pointer;font-weight:600}
+.admin .form{margin-top:12px;color:var(--fir)}
+.admin .form input,.admin .form textarea{background:#fff;border-color:#b9c2be}
+.admin .form fieldset{border-color:#b9c2be}
+.admin .opt{border-color:#e6eae8}
+.admin .status.err{color:#b0124f}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .drop-in span{animation:none;transform:none;opacity:1}
+  .hero video{display:none}
+  .way img{transition:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mark" viewBox="0 0 64 54">
+    <g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M20 9 Q32 1 44 9" stroke-width="3.4"/>
+      <path d="M21.5 9 L32 23 L42.5 9 M32 5 L32 23" stroke-width="1.3"/>
+      <path d="M3 51 L18 31 L25 39 L36 24 L49 42 L55 35 L62 51" stroke-width="3.4"/>
+    </g>
+    <circle cx="32" cy="24" r="2.6" fill="#E8197D"/>
+  </symbol>
+</svg>
+
+<nav class="nav" id="nav" aria-label="Main">
+  <a class="logo" href="#top" aria-label="HELISKYDIVE Romania, home">
+    <svg aria-hidden="true"><use href="#mark"/></svg>
+    <span class="word"><b>HELISKYDIVE</b><small>ROMANIA</small></span>
+  </a>
+  <ul>
+    <li><a href="#jumps">Jumps</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#trip">The trip</a></li>
+    <li><a href="#partner">Heli Ski Romania</a></li>
+    <li><a href="#how">How it works</a></li>
+  </ul>
+  <a class="btn" href="#wishlist"><span class="long">Join the wishlist</span><span class="short">Wishlist</span></a>
+</nav>
+
+<div class="alti" aria-hidden="true">
+  <div class="alti-read"><span id="altiNum">4000</span><small>m above ground</small></div>
+  <div class="alti-track"><div class="alti-dot" id="altiDot"></div></div>
+</div>
+
+<header class="hero" id="top">
+  <video autoplay muted loop playsinline poster="media/poster.jpg" aria-label="Skydiver hanging from a helicopter skid, then falling over the Carpathian foothills">
+    <source src="media/hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-inner">
+    <h1 class="drop-in"><span>Jump into</span><span>the wild</span><span>Carpathians</span></h1>
+    <p>Step off a helicopter skid above Romania's mountains. Exits between 3000 and 4000 m, up to a minute of freefall, and a few days in the Carpathians around them.</p>
+    <div class="actions">
+      <a class="btn" href="#wishlist">Join the wishlist</a>
+      <a class="btn ghost" href="#jumps">Choose your jump</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="expedition">
+  <div class="wrap">
+    <div>
+      <h2>Not a skydive. An expedition.</h2>
+      <p class="lede">Most jumps start at an airfield and end over farmland. Ours start in a helicopter climbing past forested ridges, with the Făgăraș peaks on the horizon and Transylvania laid out below.</p>
+      <p>No aircraft door to dive from, no queue for the next load. You climb out, hang from the skid, and let go when you're ready. Then you fall over some of the wildest country left in Europe.</p>
+      <div class="facts">
+        <div><b>3–4 km</b><span>exit altitude</span></div>
+        <div><b>50–60 s</b><span>of freefall from 4000 m</span></div>
+        <div><b>Skid</b><span>exit, no door</span></div>
+      </div>
+    </div>
+    <figure>
+      <img src="media/hang.jpg" alt="A skydiver hangs from the helicopter's landing skid above the mountains before letting go" loading="lazy">
+      <figcaption>The moment before letting go, above Avrig.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="ways" id="jumps">
+  <div class="wrap">
+    <h2>Two ways to jump</h2>
+    <div class="ways-grid">
+      <a class="way" href="#wishlist" data-pick="funjump">
+        <img src="media/freefall.jpg" alt="A skydiver in freefall over green Carpathian valleys" loading="lazy">
+        <span class="tag">Price on request</span>
+        <h3>Licensed jumpers</h3>
+        <p>You know the sport. We give you an exit you won't get anywhere else: a helicopter skid, mountain air, and a landing field at the foot of the range.</p>
+        <ul>
+          <li>Helicopter exits, solo or in small groups</li>
+          <li>Jump with the crew who scouted the zone</li>
+          <li>Add a night in the mountains, or bring a companion</li>
+        </ul>
+        <span class="btn">Join the wishlist</span>
+      </a>
+      <a class="way" href="#wishlist" data-pick="tandem">
+        <img src="media/canopy.jpg" alt="An open parachute canopy against a blue sky" loading="lazy">
+        <span class="tag soon">Starting 2027, waitlist open</span>
+        <h3>Tandem</h3>
+        <p>Never jumped before? You'll be strapped to an experienced tandem skydiver who handles everything. You just look down.</p>
+        <ul>
+          <li>Short briefing on the ground, no experience needed</li>
+          <li>Freefall and canopy ride with your tandem pilot</li>
+          <li>Filmed start to finish: two camera flyers in the air, edited photos and video</li>
+        </ul>
+        <span class="btn">Join the tandem waitlist</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="zones" id="zones">
+  <div class="wrap">
+    <div class="head">
+      <h2>Drop zones</h2>
+      <p class="lede">We pick zones for the view first. Every season we scout new ridges, valleys and landing fields across the Carpathians.</p>
+    </div>
+    <ul class="zone-list">
+      <li class="zone"><h3>Avrig</h3><p>Freefall over the foothills of the Făgăraș Mountains, with the Olt valley and Sibiu's plain below.</p><span class="state flown">Jumped here</span></li>
+      <li class="zone"><h3>Piatra Craiului</h3><p>A single limestone ridge rising out of the forest, one of the most dramatic skylines in Romania.</p><span class="state flown">Jumped here</span></li>
+      <li class="zone"><h3>New zones</h3><p>We're scouting high, remote spots with the views to match. Tell us where you'd want to jump.</p><span class="state scout">Scouting now</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="events" id="events">
+  <div class="wrap">
+    <div class="head">
+      <h2>Upcoming events</h2>
+      <p class="lede">Jump weekends and trips with fixed dates. Places in the helicopter are limited, so put your name down early.</p>
+    </div>
+    <ol class="event-list" id="eventList"></ol>
+  </div>
+</section>
+
+<section class="trip" id="trip">
+  <div class="wrap split">
+    <div class="intro">
+      <h2>Come for the jump. Stay for the mountains.</h2>
+      <p class="lede">Fly into Sibiu and spend a few days in the Carpathians. We plan the jump, the stay and the days around it, so all you need to bring is your gear.</p>
+      <img src="media/overview.jpg" alt="Aerial view of forested Carpathian foothills and villages" loading="lazy">
+    </div>
+    <ol class="days" aria-label="Sample 3-night trip">
+      <li><div><h4>Arrive in Sibiu</h4><p>Pickup from the airport, dinner in the old town, gear check and briefing.</p></div></li>
+      <li><div><h4>Jump day</h4><p>Out to the zone in the morning. Jump, repack, jump again while the weather holds.</p></div></li>
+      <li><div><h4>Into the mountains</h4><p>Horse riding, ATV trails or heli-biking, then a mountain dinner and a night in a cabin.</p></div></li>
+      <li><div><h4>Last look</h4><p>One more jump if you want it, then back to Sibiu for your flight home.</p></div></li>
+    </ol>
+  </div>
+  <div class="wrap">
+    <div class="included">
+      <h3>In every trip</h3>
+      <ul>
+        <li><b>Food</b>Local, generous, and plenty of it after a jump day.</li>
+        <li><b>Stays</b>Mountain cabins and guesthouses close to the drop zone.</li>
+        <li><b>Transport</b>We drive you between Sibiu, the drop zone and the mountains.</li>
+        <li><b>Adventure</b>Horse riding, ATV trails, heli-biking and more, picked for your group.</li>
+      </ul>
+      <p class="note">The exact program depends on season and weather. We confirm it with you before the trip.</p>
+    </div>
+    <div class="formats">
+      <h3>Ways to come</h3>
+      <ul class="format-list">
+        <li><b>Jump only</b><span>The helicopter jump, briefing and ground crew.</span><span class="who">Fun jump · Tandem</span></li>
+        <li><b>Jump + 1 night</b><span>Jump day and a night in the mountains, food included.</span><span class="who">Fun jump · Tandem</span></li>
+        <li><b>3 nights</b><span>The full Carpathian trip around your jumps.</span><span class="who">Fun jump · Tandem</span></li>
+        <li><b>Companion</b><span>Bring someone who won't jump: they can fly along in the helicopter, stay the night and watch you land.</span><span class="who">Flight · 1 night</span></li>
+      </ul>
+      <p class="note">Prices on request. Join the wishlist and we'll send you an offer for your dates and group.</p>
+      <a class="btn" href="#wishlist">Ask for an offer</a>
+    </div>
+  </div>
+</section>
+
+<section class="partner" id="partner">
+  <div class="wrap">
+    <img src="media/heli.jpg" alt="A skydiver walks to the helicopter on the landing field" loading="lazy">
+    <div>
+      <h2>Flown by Heli Ski Romania</h2>
+      <p class="lede">Every jump flies with Heli Ski Romania, Romania's heli-skiing team. They have flown the Carpathians for almost two decades and know these mountains from the air.</p>
+      <div class="facts">
+        <div><b>19+</b><span>years flying the Carpathians</span></div>
+        <div><b>7,000+</b><span>hours of mountain flying</span></div>
+        <div><b>H125</b><span>new helicopter</span></div>
+      </div>
+      <div class="seasons">
+        <div><h4>Winter: heli-skiing</h4><p>Untouched snow in the Țarcu-Godeanu and Făgăraș mountains, with certified mountain guides and a fresh line on every run.</p></div>
+        <div><h4>Summer: heli-biking</h4><p>The helicopter lifts riders and bikes to the ridges, then the trails take them down. Heli-hiking and scenic flights too.</p></div>
+      </div>
+      <dl class="crew-list">
+        <div><dt>The jumpers</dt><dd>A small crew of independent, licensed skydivers who plan every zone, brief every load and land with you.</dd></div>
+        <div><dt>Safety</dt><dd>Wind, cloud and visibility are checked on the day. We only fly when conditions are inside the limits.</dd></div>
+      </dl>
+      <a class="btn ghost" href="https://heliskiromania.com/" target="_blank" rel="noopener">Visit Heli Ski Romania</a>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="head">
+      <h2>How a heli jump works</h2>
+      <p class="lede">From the briefing to the landing field, a jump day runs like this.</p>
+    </div>
+    <ol class="steps">
+      <li><h4>Briefing</h4><p>Gear check, exit order, landing plan and the weather call for the day.</p></li>
+      <li><h4>The climb</h4><p>The helicopter lifts off from the landing field and climbs over the ridges to 3000–4000 m.</p></li>
+      <li><h4>The skid</h4><p>You climb out, hang from the skid and let go when you're ready.</p></li>
+      <li><h4>Freefall</h4><p>50 to 60 seconds of freefall from 4000 m, with the Carpathians below you.</p></li>
+      <li><h4>Canopy and landing</h4><p>Open the parachute, fly down over the valley and land where the ground crew is waiting.</p></li>
+    </ol>
+
+    <div class="faq">
+      <h2>Questions</h2>
+      <details><summary>Who can jump tandem?</summary><p>Anyone from 14 years old in normal health. Under 18 you need written consent from both parents with a certified signature. Over 60 you need a medical certificate. Every tandem passenger fills in a health declaration before the flight, and tells us their weight when they sign up.</p></details>
+      <details><summary>What do licensed jumpers need?</summary><p>A valid skydiving licence, a valid medical certificate, your logbook, and gear with valid airworthiness documents. We check them on the landing field before boarding.</p></details>
+      <details><summary>What if the weather is bad?</summary><p>We only fly when wind, cloud and visibility are inside the limits for your level. If they're not, we move your jump to another day.</p></details>
+      <details><summary>Will my jump be filmed?</summary><p>Tandem jumps are filmed from start to finish: on the ground, in the helicopter and in the air, where two camera flyers jump alongside you. You get edited photos and video afterwards. Our camera flyers have more than 200 jumps each, as Romanian rules require.</p></details>
+      <details><summary>Can friends or family come along?</summary><p>Yes. Companions can ride along in the helicopter and watch you step off the skid, stay the night in the mountains with you, or both. Choose the companion options when you join the wishlist.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="wish" id="wishlist">
+  <div class="wrap">
+    <aside>
+      <h2>Join the wishlist</h2>
+      <p class="lede">Tell us what you'd like to do. We'll get back to you with dates and a price, and you'll hear about new events first.</p>
+      <p>Prefer email? Write to <a href="mailto:office@heliskydive.ro">office@heliskydive.ro</a></p>
+    </aside>
+    <form class="form" id="wishForm" name="wishlist" method="POST" data-netlify="true" netlify-honeypot="website" novalidate>
+      <input type="hidden" name="form-name" value="wishlist">
+      <input type="hidden" name="source" value="site">
+      <label>Last name<input name="lastName" autocomplete="family-name" required></label>
+      <label>First name<input name="firstName" autocomplete="given-name" required></label>
+      <label>Email<input name="email" type="email" autocomplete="email" required></label>
+      <label>Phone<input name="phone" type="tel" autocomplete="tel" required></label>
+      <label class="full">City or village<input name="city" autocomplete="address-level2" required></label>
+      <fieldset>
+        <legend>What would you like to do?</legend>
+        <label class="opt"><input type="checkbox" value="yes" name="funjump"><span>Fun jump<small>Licensed skydivers</small></span><span class="qty">Jumps <input type="number" name="funjumpCount" min="1" max="99" value="1" aria-label="Number of fun jumps"></span></label>
+        <label class="opt"><input type="checkbox" value="yes" name="funjumpStay"><span>Fun jump + 1-night stay<small>Licensed skydivers</small></span><span class="qty">Jumps <input type="number" name="funjumpStayCount" min="1" max="99" value="1" aria-label="Number of fun jumps with stay"></span></label>
+        <label class="opt"><input type="checkbox" value="yes" name="tandem"><span>Tandem<small>No experience needed, from 2027</small></span><span></span></label>
+        <label class="opt"><input type="checkbox" value="yes" name="tandemStay"><span>Tandem + 1-night stay<small>No experience needed, from 2027</small></span><span></span></label>
+        <label class="opt"><input type="checkbox" value="yes" name="companionFlight"><span>Companion, helicopter flight<small>Flies along and watches you jump</small></span><span class="qty">People <input type="number" name="companionFlights" min="1" max="20" value="1" aria-label="Number of companions on the flight"></span></label>
+        <label class="opt"><input type="checkbox" value="yes" name="companion"><span>Companion, 1-night stay<small>For someone who comes along but doesn't jump</small></span><span class="qty">People <input type="number" name="companions" min="1" max="20" value="1" aria-label="Number of companions"></span></label>
+      </fieldset>
+      <label class="full">Preferred event or dates
+        <select name="event" id="eventSel"><option value="">Any date</option></select>
+      </label>
+      <label class="full">Anything else<textarea name="message" placeholder="Licence and number of jumps, weight for tandem, where you're coming from"></textarea></label>
+      <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+      <label class="consent"><input type="checkbox" value="yes" name="consent" required><span>I agree that HELISKYDIVE keeps these details to contact me about jumps and events. I can ask for them to be deleted at any time.</span></label>
+      <button class="btn" type="submit">Join the wishlist</button>
+      <p class="status" id="wishStatus" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <a class="logo" href="#top" aria-label="HELISKYDIVE Romania, back to top">
+    <svg aria-hidden="true"><use href="#mark"/></svg>
+    <span class="word"><b>HELISKYDIVE</b><small>ROMANIA</small></span>
+  </a>
+  <span>Wild, unique jumps over raw Romanian mountains. Flown with <a href="https://heliskiromania.com/" target="_blank" rel="noopener">Heli Ski Romania</a>.</span>
+  <span class="foot-right">
+    <a href="mailto:office@heliskydive.ro">office@heliskydive.ro</a>
+    <button class="lock" id="lockBtn" type="button" aria-label="Team area"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>
+  </span>
+</footer>
+
+<!-- Zona echipei: se deschide doar din lacătul din subsol -->
+<dialog class="admin" id="admin" aria-labelledby="adminTitle">
+  <div class="admin-in">
+    <div class="admin-top">
+      <h2 id="adminTitle">Zona echipei</h2>
+      <button class="x" type="button" id="adminClose" aria-label="Închide">×</button>
+    </div>
+    <form class="login" id="loginForm">
+      <input type="password" id="adminKey" placeholder="Parola" autocomplete="current-password" aria-label="Parola">
+      <button class="btn" type="submit">Deschide</button>
+      <span class="status" id="loginStatus" role="status"></span>
+    </form>
+    <div id="adminBody" hidden>
+      <p>Toate înscrierile din wishlist ajung în Netlify, la <b>Forms → wishlist</b>. Acolo le vedeți ca tabel, le descărcați în CSV și primiți email la fiecare înscriere nouă. Le vede doar cine are acces la contul vostru Netlify.</p>
+      <div class="tools"><a class="btn" href="https://app.netlify.com/sites/heliskydive/forms" target="_blank" rel="noopener">Vezi înscrierile în Netlify</a></div>
+      <h3>Înscrie pe cineva</h3>
+      <form class="form" id="addForm" novalidate></form>
+    </div>
+  </div>
+</dialog>
+
+<script>
+/* Wishlist-ul folosește Netlify Forms: înscrierile apar în Netlify → Forms → wishlist.
+   Pe alte adrese decât site-ul publicat (ex. previzualizare), formularul nu trimite nimic. */
+var LIVE=/(^|\.)heliskydive\.ro$|\.netlify\.app$/.test(location.hostname);
+var ADMIN_HASH='5cac0a318669fadfee734fb340a5f5b70b428ac57a9f4b109cb6e150b2ba7e57';
+
+/* Evenimente: editați lista de aici */
+var EVENTS=[
+  {date:'2027-05-15', end:'2027-05-16', title:'Avrig heli jump weekend', place:'Avrig, Făgăraș foothills', kinds:['Fun jump','Stays'], spots:8},
+  {date:'2027-06-19', end:'2027-06-22', title:'Piatra Craiului expedition', place:'Piatra Craiului', kinds:['Fun jump','3 nights'], spots:6},
+  {date:'2027-07-24', end:'2027-07-25', title:'First tandem weekend', place:'Avrig', kinds:['Tandem','Wishlist first'], spots:10},
+  {date:'2027-09-11', end:'2027-09-14', title:'New zone: autumn ridges', place:'Location revealed to participants', kinds:['Fun jump','3 nights'], spots:6}
+];
+
+(function(){
+  var M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function d(x){var p=x.split('-');return {y:+p[0],m:+p[1]-1,d:+p[2]}}
+  var list=document.getElementById('eventList'), sel=document.getElementById('eventSel'), today=new Date().toISOString().slice(0,10);
+  EVENTS.filter(function(e){return (e.end||e.date)>=today}).forEach(function(e){
+    var a=d(e.date), b=d(e.end||e.date);
+    var range=a.d+(b.d!==a.d||b.m!==a.m?'–'+b.d:'')+' '+M[a.m]+(b.m!==a.m?'/'+M[b.m]:'');
+    var label=e.title+' ('+range+' '+a.y+')';
+    var o=document.createElement('option');o.value=label;o.textContent=label;sel.appendChild(o);
+    var li=document.createElement('li');li.className='event';
+    li.innerHTML='<time datetime="'+e.date+'">'+range+'<small>'+a.y+'</small></time><div><h3></h3><p></p><div class="kinds"></div></div><div class="right"><span class="left"></span><a class="btn" href="#wishlist">Put my name down</a></div>';
+    li.querySelector('h3').textContent=e.title; li.querySelector('p').textContent=e.place;
+    li.querySelector('.left').textContent=e.spots+' places';
+    e.kinds.forEach(function(k){var s=document.createElement('span');s.textContent=k;li.querySelector('.kinds').appendChild(s)});
+    li.querySelector('.btn').addEventListener('click',function(){sel.value=label});
+    list.appendChild(li);
+  });
+})();
+
+/* Altimetru + meniu */
+(function(){
+  var num=document.getElementById('altiNum'), dot=document.getElementById('altiDot'), nav=document.getElementById('nav'), ticking=false;
+  function update(){
+    var h=document.documentElement.scrollHeight-innerHeight, p=h>0?Math.min(1,Math.max(0,scrollY/h)):0;
+    num.textContent=(Math.round(4000*(1-p)/10)*10).toLocaleString('en-US');
+    dot.style.top=(p*100)+'%';
+    nav.classList.toggle('solid',scrollY>innerHeight*0.6);
+    ticking=false;
+  }
+  addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});
+  addEventListener('resize',update);update();
+  document.querySelectorAll('[data-pick]').forEach(function(a){
+    a.addEventListener('click',function(){var c=document.querySelector('#wishForm [name="'+a.dataset.pick+'"]');if(c)c.checked=true});
+  });
+})();
+
+/* ===== Wishlist ===== */
+function sha(t){
+  if(!(window.crypto&&crypto.subtle))return Promise.resolve('');
+  return crypto.subtle.digest('SHA-256',new TextEncoder().encode(String(t))).then(function(b){
+    return Array.prototype.map.call(new Uint8Array(b),function(x){return ('0'+x.toString(16)).slice(-2)}).join('')});
+}
+function readForm(f){
+  var o={};
+  ['lastName','firstName','email','phone','city'].forEach(function(k){o[k]=f[k].value.trim()});
+  o.any=['funjump','funjumpStay','tandem','tandemStay','companion','companionFlight'].some(function(k){return f[k].checked});
+  o.consent=f.consent?f.consent.checked:false;
+  return o;
+}
+function checkForm(o,needConsent){
+  if(!o.lastName||!o.firstName||!o.email||!o.phone||!o.city)return needConsent?'Please fill in name, email, phone and city.':'Completați nume, prenume, email, telefon și oraș.';
+  if(!/^\S+@\S+\.\S+$/.test(o.email))return needConsent?'Please check the email address.':'Verificați adresa de email.';
+  if(!o.any)return needConsent?'Choose at least one option.':'Bifați cel puțin o opțiune.';
+  if(needConsent&&!o.consent)return 'Please tick the box so we can keep your details.';
+  return '';
+}
+function send(f,extra){
+  var p=new URLSearchParams(new FormData(f));
+  [['funjump','funjumpCount'],['funjumpStay','funjumpStayCount'],['companion','companions'],['companionFlight','companionFlights']].forEach(function(x){
+    if(!f[x[0]].checked)p.delete(x[1]);
+  });
+  p.set('form-name','wishlist');
+  Object.keys(extra||{}).forEach(function(k){p.set(k,extra[k])});
+  if(!LIVE)return Promise.reject('preview');
+  return fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()})
+    .then(function(r){if(!r.ok)throw r});
+}
+
+(function(){
+  var f=document.getElementById('wishForm'), st=document.getElementById('wishStatus'), btn=f.querySelector('button[type=submit]');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var err=checkForm(readForm(f),true);
+    st.className='status';
+    if(err){st.textContent=err;st.classList.add('err');return}
+    btn.disabled=true;st.textContent='Sending…';
+    send(f).then(function(){
+      f.reset();st.textContent="You're on the wishlist. We'll be in touch by email or phone.";
+    }).catch(function(x){
+      st.textContent=x==='preview'?'Preview only: the wishlist starts saving once the site is live on heliskydive.ro.':'We couldn\'t save your request. Try again, or email office@heliskydive.ro.';
+      st.classList.add('err');
+    }).then(function(){btn.disabled=false});
+  });
+})();
+
+/* ===== Zona echipei (lacătul din subsol) ===== */
+(function(){
+  var dlg=document.getElementById('admin'), $=function(id){return document.getElementById(id)};
+  var add=$('addForm'), pub=$('wishForm');
+  add.innerHTML=pub.innerHTML
+    .replace(/<label class="consent"[\s\S]*?<\/label>/,'')
+    .replace(/<div class="hp"[\s\S]*?<\/div>/,'')
+    .replace('Join the wishlist','Adaugă în wishlist')
+    .replace(/id="[^"]*"/g,'');
+  $('lockBtn').addEventListener('click',function(){
+    if(typeof dlg.showModal==='function')dlg.showModal();else dlg.setAttribute('open','');
+    $('adminKey').focus();
+  });
+  $('adminClose').addEventListener('click',function(){dlg.close()});
+  dlg.addEventListener('close',function(){$('adminBody').hidden=true;$('loginForm').hidden=false;$('adminKey').value='';$('loginStatus').textContent=''});
+  $('loginForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    sha($('adminKey').value).then(function(h){
+      if(h!==ADMIN_HASH){$('loginStatus').textContent='Parolă greșită.';return}
+      $('loginForm').hidden=true;$('adminBody').hidden=false;
+    });
+  });
+  add.addEventListener('submit',function(e){
+    e.preventDefault();
+    var st=add.querySelector('.status'), err=checkForm(readForm(add),false);
+    st.className='status';
+    if(err){st.textContent=err;st.classList.add('err');return}
+    st.textContent='Se salvează…';
+    send(add,{source:'echipa',consent:'adăugat de echipă'}).then(function(){add.reset();st.textContent='Adăugat. Apare în Netlify → Forms.'})
+      .catch(function(x){st.textContent=x==='preview'?'Previzualizare: se salvează doar pe heliskydive.ro.':'Nu s-a putut salva.';st.classList.add('err')});
+  });
+})();
+</script>
+</body>
+</html>

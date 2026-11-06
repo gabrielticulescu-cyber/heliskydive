@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200" role="img" aria-label="HELISKYDIVE Romania">
+  <title>HELISKYDIVE Romania</title>
+  <g fill="none" stroke="#0E2619" stroke-linejoin="round" stroke-linecap="round">
+    <!-- canopy -->
+    <path d="M58 30 Q90 6 122 30" stroke-width="7"/>
+    <path d="M62 30 L90 70 L118 30 M90 18 L90 70" stroke-width="2.4"/>
+    <!-- ridge -->
+    <path d="M14 150 L58 92 L80 116 L112 70 L150 124 L170 104 L196 150" stroke-width="7"/>
+  </g>
+  <circle cx="90" cy="72" r="6" fill="#E8197D"/>
+  <text x="214" y="118" font-family="'Big Shoulders Display','Arial Narrow',sans-serif" font-weight="900" font-size="74" letter-spacing="1" fill="#0E2619">HELISKYDIVE</text>
+  <text x="217" y="150" font-family="'Instrument Sans',Arial,sans-serif" font-weight="600" font-size="20" letter-spacing="9" fill="#E8197D">ROMANIA</text>
+  <text x="14" y="188" font-family="'Instrument Sans',Arial,sans-serif" font-size="15" fill="#2F4A3A">wild, unique jumps over raw Romanian mountains</text>
+</svg>
