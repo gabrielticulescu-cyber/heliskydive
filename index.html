@@ -4,10 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HELISKYDIVE</title>
+<link rel="icon" type="image/png" href="media/shield-sm.png">
 <meta name="description" content="Helicopter skydiving over the Romanian Carpathians, flown with Heli Ski Romania. Fun jumps for licensed skydivers, tandem from 2027, and mountain stays around the jump.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;800;900&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;800;900&family=Instrument+Sans:wght@400;500;600&family=Inter:wght@200;900&display=swap" rel="stylesheet">
 <style>
 :root{
   --fir:#0E2619;
@@ -37,11 +38,12 @@ a{color:inherit}
 [hidden]{display:none!important}
 
 /* ---------- logo ---------- */
-.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:inherit}
-.logo svg{width:40px;height:34px;flex:none}
+.logo{display:flex;align-items:center;gap:.65rem;text-decoration:none;color:inherit}
+.logo img{width:40px;height:auto;flex:none}
 .logo .word{display:grid;line-height:1}
-.logo b{font:900 1.55rem/.9 var(--display);letter-spacing:.02em}
-.logo small{font:600 .62rem/1 var(--text);letter-spacing:.42em;color:var(--canopy-soft);margin-top:3px}
+.logo b{font:900 1.35rem/.95 "Inter", var(--text);letter-spacing:-.01em}
+.logo small{font:200 .98rem/1 "Inter", var(--text);letter-spacing:.2em;margin-top:2px}
+.foot-logo img{width:110px}
 
 /* ---------- nav ---------- */
 .nav{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px var(--gutter);color:#fff;transition:background .3s}
@@ -232,7 +234,6 @@ h3{font:800 clamp(1.8rem,3vw,2.6rem)/1 var(--display);text-transform:uppercase}
 /* ---------- footer ---------- */
 footer{background:var(--fir);color:var(--mist);padding:40px var(--gutter);border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:.9rem}
 footer .logo{color:var(--snow)}
-footer .logo b{font-size:2rem}
 .foot-right{display:flex;align-items:center;gap:18px}
 .lock{background:none;border:0;color:inherit;opacity:.28;cursor:pointer;padding:6px;line-height:0;border-radius:6px}
 .lock:hover,.lock:focus-visible{opacity:.8}
@@ -280,20 +281,9 @@ dialog.admin::backdrop{background:rgba(14,38,25,.75)}
 </head>
 <body>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="mark" viewBox="0 0 64 54">
-    <g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round">
-      <path d="M20 9 Q32 1 44 9" stroke-width="3.4"/>
-      <path d="M21.5 9 L32 23 L42.5 9 M32 5 L32 23" stroke-width="1.3"/>
-      <path d="M3 51 L18 31 L25 39 L36 24 L49 42 L55 35 L62 51" stroke-width="3.4"/>
-    </g>
-    <circle cx="32" cy="24" r="2.6" fill="#E8197D"/>
-  </symbol>
-</svg>
-
 <nav class="nav" id="nav" aria-label="Main">
   <a class="logo" href="#top" aria-label="HELISKYDIVE Romania, home">
-    <svg aria-hidden="true"><use href="#mark"/></svg>
+    <img src="media/shield-sm.png" alt="" width="40" height="45">
     <span class="word"><b>HELISKYDIVE</b><small>ROMANIA</small></span>
   </a>
   <ul>
@@ -527,9 +517,8 @@ dialog.admin::backdrop{background:rgba(14,38,25,.75)}
 </main>
 
 <footer>
-  <a class="logo" href="#top" aria-label="HELISKYDIVE Romania, back to top">
-    <svg aria-hidden="true"><use href="#mark"/></svg>
-    <span class="word"><b>HELISKYDIVE</b><small>ROMANIA</small></span>
+  <a class="logo foot-logo" href="#top" aria-label="HELISKYDIVE Romania, back to top">
+    <img src="media/logo-white-sm.png" alt="HELISKYDIVE Romania" width="110" height="168">
   </a>
   <span>Wild, unique jumps over raw Romanian mountains. Flown with <a href="https://heliskiromania.com/" target="_blank" rel="noopener">Heli Ski Romania</a>.</span>
   <span class="foot-right">
