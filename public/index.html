@@ -488,27 +488,27 @@ dialog.admin::backdrop{background:rgba(14,38,25,.75)}
     </aside>
     <form class="form" id="wishForm" name="wishlist" method="POST" data-netlify="true" netlify-honeypot="website" novalidate>
       <input type="hidden" name="form-name" value="wishlist">
-      <input type="hidden" name="source" value="site">
-      <label>Last name<input name="lastName" autocomplete="family-name" required></label>
-      <label>First name<input name="firstName" autocomplete="given-name" required></label>
-      <label>Email<input name="email" type="email" autocomplete="email" required></label>
-      <label>Phone<input name="phone" type="tel" autocomplete="tel" required></label>
-      <label class="full">City or village<input name="city" autocomplete="address-level2" required></label>
+      <input type="hidden" name="subject" value="Wishlist HELISKYDIVE: înscriere nouă">
+      <label>Last name<input name="Nume" data-k="lastName" autocomplete="family-name" required></label>
+      <label>First name<input name="Prenume" data-k="firstName" autocomplete="given-name" required></label>
+      <label>Email<input name="Email" data-k="email" type="email" autocomplete="email" required></label>
+      <label>Phone<input name="Telefon" data-k="phone" type="tel" autocomplete="tel" required></label>
+      <label class="full">City or village<input name="Oraș / Comună" data-k="city" autocomplete="address-level2" required></label>
       <fieldset>
         <legend>What would you like to do?</legend>
-        <label class="opt"><input type="checkbox" value="yes" name="funjump"><span>Fun jump<small>Licensed skydivers</small></span><span class="qty">Jumps <input type="number" name="funjumpCount" min="1" max="99" value="1" aria-label="Number of fun jumps"></span></label>
-        <label class="opt"><input type="checkbox" value="yes" name="funjumpStay"><span>Fun jump + 1-night stay<small>Licensed skydivers</small></span><span class="qty">Jumps <input type="number" name="funjumpStayCount" min="1" max="99" value="1" aria-label="Number of fun jumps with stay"></span></label>
-        <label class="opt"><input type="checkbox" value="yes" name="tandem"><span>Tandem<small>No experience needed</small></span><span></span></label>
-        <label class="opt"><input type="checkbox" value="yes" name="tandemStay"><span>Tandem + 1-night stay<small>No experience needed</small></span><span></span></label>
-        <label class="opt"><input type="checkbox" value="yes" name="companionFlight"><span>Companion, helicopter flight<small>Flies along and watches you jump</small></span><span class="qty">People <input type="number" name="companionFlights" min="1" max="20" value="1" aria-label="Number of companions on the flight"></span></label>
-        <label class="opt"><input type="checkbox" value="yes" name="companion"><span>Companion, 1-night stay<small>For someone who comes along but doesn't jump</small></span><span class="qty">People <input type="number" name="companions" min="1" max="20" value="1" aria-label="Number of companions"></span></label>
+        <label class="opt"><input type="checkbox" value="da" name="Fun jump" data-k="funjump"><span>Fun jump<small>Licensed skydivers</small></span><span class="qty">Jumps <input type="number" name="Fun jump – număr salturi" data-k="funjumpCount" min="1" max="99" value="1" aria-label="Number of fun jumps"></span></label>
+        <label class="opt"><input type="checkbox" value="da" name="Fun jump + cazare 1 noapte" data-k="funjumpStay"><span>Fun jump + 1-night stay<small>Licensed skydivers</small></span><span class="qty">Jumps <input type="number" name="Fun jump + cazare – număr salturi" data-k="funjumpStayCount" min="1" max="99" value="1" aria-label="Number of fun jumps with stay"></span></label>
+        <label class="opt"><input type="checkbox" value="da" name="Tandem" data-k="tandem"><span>Tandem<small>No experience needed</small></span><span></span></label>
+        <label class="opt"><input type="checkbox" value="da" name="Tandem + cazare 1 noapte" data-k="tandemStay"><span>Tandem + 1-night stay<small>No experience needed</small></span><span></span></label>
+        <label class="opt"><input type="checkbox" value="da" name="Însoțitori la zbor" data-k="companionFlight"><span>Companion, helicopter flight<small>Flies along and watches you jump</small></span><span class="qty">People <input type="number" name="Însoțitori la zbor – persoane" data-k="companionFlights" min="1" max="20" value="1" aria-label="Number of companions on the flight"></span></label>
+        <label class="opt"><input type="checkbox" value="da" name="Însoțitori cazare 1 noapte" data-k="companion"><span>Companion, 1-night stay<small>For someone who comes along but doesn't jump</small></span><span class="qty">People <input type="number" name="Însoțitori cazare – persoane" data-k="companions" min="1" max="20" value="1" aria-label="Number of companions"></span></label>
       </fieldset>
       <label class="full">Preferred event or dates
-        <select name="event" id="eventSel"><option value="">Any date</option></select>
+        <select name="Eveniment dorit" data-k="event" id="eventSel"><option value="">Any date</option></select>
       </label>
-      <label class="full">Anything else<textarea name="message" placeholder="Licence and number of jumps, weight for tandem, where you're coming from"></textarea></label>
+      <label class="full">Anything else<textarea name="Mesaj" data-k="message" placeholder="Licence and number of jumps, weight for tandem, where you're coming from"></textarea></label>
       <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
-      <label class="consent"><input type="checkbox" value="yes" name="consent" required><span>I agree that HELISKYDIVE keeps these details to contact me about jumps and events. I can ask for them to be deleted at any time.</span></label>
+      <label class="consent"><input type="checkbox" value="da" name="Acord date personale" data-k="consent" required><span>I agree that HELISKYDIVE keeps these details to contact me about jumps and events. I can ask for them to be deleted at any time.</span></label>
       <button class="btn" type="submit">Join the wishlist</button>
       <p class="status" id="wishStatus" role="status" aria-live="polite"></p>
     </form>
@@ -531,7 +531,7 @@ dialog.admin::backdrop{background:rgba(14,38,25,.75)}
 <dialog class="admin" id="admin" aria-labelledby="adminTitle">
   <div class="admin-in">
     <div class="admin-top">
-      <h2 id="adminTitle">Zona echipei</h2>
+      <h2 id="adminTitle">Wishlist – zona echipei</h2>
       <button class="x" type="button" id="adminClose" aria-label="Închide">×</button>
     </div>
     <form class="login" id="loginForm">
@@ -540,19 +540,18 @@ dialog.admin::backdrop{background:rgba(14,38,25,.75)}
       <span class="status" id="loginStatus" role="status"></span>
     </form>
     <div id="adminBody" hidden>
-      <p>Toate înscrierile din wishlist ajung în Netlify, la <b>Forms → wishlist</b>. Acolo le vedeți ca tabel, le descărcați în CSV și primiți email la fiecare înscriere nouă. Le vede doar cine are acces la contul vostru Netlify.</p>
-      <div class="tools"><a class="btn" href="https://app.netlify.com/sites/heliskydive/forms" target="_blank" rel="noopener">Vezi înscrierile în Netlify</a></div>
-      <h3>Înscrie pe cineva</h3>
-      <form class="form" id="addForm" novalidate></form>
+      <div class="stats" id="stats"></div>
+      <div class="tools">
+        <input type="search" id="filter" placeholder="Caută după nume, telefon, oraș…" aria-label="Caută">
+        <button class="btn" type="button" id="refreshBtn">Reîncarcă</button>
+        <button class="btn" type="button" id="csvBtn">Descarcă Excel (CSV)</button>
+      </div>
+      <div class="tbl-wrap"><table id="tbl"></table></div>
     </div>
   </div>
 </dialog>
 
 <script>
-/* Wishlist-ul folosește Netlify Forms: înscrierile apar în Netlify → Forms → wishlist.
-   Pe alte adrese decât site-ul publicat (ex. previzualizare), formularul nu trimite nimic. */
-var LIVE=/(^|\.)heliskydive\.ro$|\.netlify\.app$/.test(location.hostname);
-var ADMIN_HASH='5cac0a318669fadfee734fb340a5f5b70b428ac57a9f4b109cb6e150b2ba7e57';
 
 /* Evenimente: editați lista de aici */
 var EVENTS=[
@@ -595,89 +594,127 @@ var EVENTS=[
   addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});
   addEventListener('resize',update);update();
   document.querySelectorAll('[data-pick]').forEach(function(a){
-    a.addEventListener('click',function(){var c=document.querySelector('#wishForm [name="'+a.dataset.pick+'"]');if(c)c.checked=true});
+    a.addEventListener('click',function(){var c=document.querySelector('#wishForm [data-k="'+a.dataset.pick+'"]');if(c)c.checked=true});
   });
 })();
 
-/* ===== Wishlist ===== */
-function sha(t){
-  if(!(window.crypto&&crypto.subtle))return Promise.resolve('');
-  return crypto.subtle.digest('SHA-256',new TextEncoder().encode(String(t))).then(function(b){
-    return Array.prototype.map.call(new Uint8Array(b),function(x){return ('0'+x.toString(16)).slice(-2)}).join('')});
-}
-function readForm(f){
+/* ===== Wishlist =====
+   Fiecare înscriere merge în două locuri:
+   1) funcția /api/wishlist (tabelul din zona echipei, cu parolă);
+   2) Netlify Forms (emailul de notificare, cu câmpuri în română). */
+var API='/api/wishlist';
+function fld(f,k){return f.querySelector('[data-k="'+k+'"]')}
+function entryOf(f){
   var o={};
-  ['lastName','firstName','email','phone','city'].forEach(function(k){o[k]=f[k].value.trim()});
-  o.any=['funjump','funjumpStay','tandem','tandemStay','companion','companionFlight'].some(function(k){return f[k].checked});
-  o.consent=f.consent?f.consent.checked:false;
+  ['lastName','firstName','email','phone','city','event','message'].forEach(function(k){o[k]=fld(f,k).value.trim()});
+  ['funjump','funjumpStay','tandem','tandemStay','companionFlight','companion','consent'].forEach(function(k){o[k]=fld(f,k).checked?'da':''});
+  o.funjumpCount=o.funjump?fld(f,'funjumpCount').value:'';
+  o.funjumpStayCount=o.funjumpStay?fld(f,'funjumpStayCount').value:'';
+  o.companionFlights=o.companionFlight?fld(f,'companionFlights').value:'';
+  o.companions=o.companion?fld(f,'companions').value:'';
+  o.website=f.querySelector('[name=website]').value;
   return o;
 }
-function checkForm(o,needConsent){
-  if(!o.lastName||!o.firstName||!o.email||!o.phone||!o.city)return needConsent?'Please fill in name, email, phone and city.':'Completați nume, prenume, email, telefon și oraș.';
-  if(!/^\S+@\S+\.\S+$/.test(o.email))return needConsent?'Please check the email address.':'Verificați adresa de email.';
-  if(!o.any)return needConsent?'Choose at least one option.':'Bifați cel puțin o opțiune.';
-  if(needConsent&&!o.consent)return 'Please tick the box so we can keep your details.';
+function checkEntry(o){
+  if(!o.lastName||!o.firstName||!o.email||!o.phone||!o.city)return 'Please fill in name, email, phone and city.';
+  if(!/^\S+@\S+\.\S+$/.test(o.email))return 'Please check the email address.';
+  if(!(o.funjump||o.funjumpStay||o.tandem||o.tandemStay||o.companion||o.companionFlight))return 'Choose at least one option.';
+  if(!o.consent)return 'Please tick the box so we can keep your details.';
   return '';
 }
-function send(f,extra){
+function api(body){
+  return fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+    .then(function(r){return r.json().catch(function(){return {ok:false,error:'http_'+r.status}})});
+}
+function sendForms(f,o){
   var p=new URLSearchParams(new FormData(f));
   [['funjump','funjumpCount'],['funjumpStay','funjumpStayCount'],['companion','companions'],['companionFlight','companionFlights']].forEach(function(x){
-    if(!f[x[0]].checked)p.delete(x[1]);
+    if(!o[x[0]])p.delete(fld(f,x[1]).name);
   });
-  p.set('form-name','wishlist');
-  Object.keys(extra||{}).forEach(function(k){p.set(k,extra[k])});
-  if(!LIVE)return Promise.reject('preview');
+  p.set('subject','Wishlist HELISKYDIVE: '+o.firstName+' '+o.lastName);
   return fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()})
-    .then(function(r){if(!r.ok)throw r});
+    .then(function(r){if(!r.ok)throw r;return {ok:true}});
 }
 
 (function(){
   var f=document.getElementById('wishForm'), st=document.getElementById('wishStatus'), btn=f.querySelector('button[type=submit]');
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var err=checkForm(readForm(f),true);
+    var o=entryOf(f), err=checkEntry(o);
     st.className='status';
     if(err){st.textContent=err;st.classList.add('err');return}
     btn.disabled=true;st.textContent='Sending…';
-    send(f).then(function(){
-      f.reset();st.textContent="You're on the wishlist. We'll be in touch by email or phone.";
-    }).catch(function(x){
-      st.textContent=x==='preview'?'Preview only: the wishlist starts saving once the site is live on heliskydive.ro.':'We couldn\'t save your request. Try again, or email office@heliskydive.ro.';
-      st.classList.add('err');
-    }).then(function(){btn.disabled=false});
+    var a=api({action:'signup',entry:o}).then(function(r){return !!r.ok}).catch(function(){return false});
+    var b=sendForms(f,o).then(function(){return true}).catch(function(){return false});
+    Promise.all([a,b]).then(function(res){
+      if(res[0]||res[1]){f.reset();st.textContent="You're on the wishlist. We'll be in touch by email or phone."}
+      else{st.textContent='We couldn\'t save your request. Try again, or email office@heliskydive.ro.';st.classList.add('err')}
+      btn.disabled=false;
+    });
   });
 })();
 
 /* ===== Zona echipei (lacătul din subsol) ===== */
 (function(){
-  var dlg=document.getElementById('admin'), $=function(id){return document.getElementById(id)};
-  var add=$('addForm'), pub=$('wishForm');
-  add.innerHTML=pub.innerHTML
-    .replace(/<label class="consent"[\s\S]*?<\/label>/,'')
-    .replace(/<div class="hp"[\s\S]*?<\/div>/,'')
-    .replace('Join the wishlist','Adaugă în wishlist')
-    .replace(/id="[^"]*"/g,'');
+  var dlg=document.getElementById('admin'), $=function(id){return document.getElementById(id)}, key='', rows=[];
+  var COLS=[['createdAt','Data'],['lastName','Nume'],['firstName','Prenume'],['email','Email'],['phone','Telefon'],['city','Oraș / Comună'],
+    ['funjump','Fun jump'],['funjumpCount','Salturi'],['funjumpStay','FJ + cazare'],['funjumpStayCount','Salturi'],
+    ['tandem','Tandem'],['tandemStay','Tandem + cazare'],['companionFlights','Însoțitori zbor'],['companions','Însoțitori cazare'],
+    ['event','Eveniment'],['message','Mesaj']];
+  var ERR={wrong_key:'Parolă greșită.',locked:'Prea multe încercări greșite. Reîncercați peste 15 minute.',
+    not_configured:'Parola nu e setată încă în Netlify (ADMIN_KEY).'};
   $('lockBtn').addEventListener('click',function(){
     if(typeof dlg.showModal==='function')dlg.showModal();else dlg.setAttribute('open','');
     $('adminKey').focus();
   });
   $('adminClose').addEventListener('click',function(){dlg.close()});
-  dlg.addEventListener('close',function(){$('adminBody').hidden=true;$('loginForm').hidden=false;$('adminKey').value='';$('loginStatus').textContent=''});
+  dlg.addEventListener('close',function(){key='';rows=[];$('adminBody').hidden=true;$('loginForm').hidden=false;$('adminKey').value='';$('loginStatus').textContent='';$('tbl').innerHTML=''});
   $('loginForm').addEventListener('submit',function(e){
     e.preventDefault();
-    sha($('adminKey').value).then(function(h){
-      if(h!==ADMIN_HASH){$('loginStatus').textContent='Parolă greșită.';return}
-      $('loginForm').hidden=true;$('adminBody').hidden=false;
-    });
+    var k=$('adminKey').value;$('loginStatus').textContent='Se verifică…';
+    api({action:'list',key:k}).then(function(r){
+      if(!r.ok){$('loginStatus').textContent=ERR[r.error]||'Nu am putut încărca lista.';return}
+      key=k;rows=r.rows||[];$('loginStatus').textContent='';$('loginForm').hidden=true;$('adminBody').hidden=false;render();
+    }).catch(function(){$('loginStatus').textContent='Nu am putut încărca lista.'});
   });
-  add.addEventListener('submit',function(e){
-    e.preventDefault();
-    var st=add.querySelector('.status'), err=checkForm(readForm(add),false);
-    st.className='status';
-    if(err){st.textContent=err;st.classList.add('err');return}
-    st.textContent='Se salvează…';
-    send(add,{source:'echipa',consent:'adăugat de echipă'}).then(function(){add.reset();st.textContent='Adăugat. Apare în Netlify → Forms.'})
-      .catch(function(x){st.textContent=x==='preview'?'Previzualizare: se salvează doar pe heliskydive.ro.':'Nu s-a putut salva.';st.classList.add('err')});
+  function load(){api({action:'list',key:key}).then(function(r){if(r.ok){rows=r.rows||[];render()}})}
+  $('refreshBtn').addEventListener('click',load);
+  $('filter').addEventListener('input',render);
+  function n(v){return parseInt(v,10)||0}
+  function render(){
+    var q=$('filter').value.toLowerCase();
+    var shown=rows.filter(function(r){return !q||COLS.some(function(c){return String(r[c[0]]||'').toLowerCase().indexOf(q)>-1})});
+    var stats=[[rows.length,'persoane înscrise'],
+      [rows.reduce(function(a,r){return a+n(r.funjumpCount)+n(r.funjumpStayCount)},0),'fun jump-uri cerute'],
+      [rows.filter(function(r){return r.tandem||r.tandemStay}).length,'vor tandem'],
+      [rows.filter(function(r){return r.funjumpStay||r.tandemStay}).length,'cu cazare'],
+      [rows.reduce(function(a,r){return a+n(r.companionFlights)},0),'însoțitori la zbor'],
+      [rows.reduce(function(a,r){return a+n(r.companions)},0),'însoțitori cazare']];
+    $('stats').innerHTML='';
+    stats.forEach(function(x){var d=document.createElement('div');d.innerHTML='<b></b><span></span>';d.querySelector('b').textContent=x[0];d.querySelector('span').textContent=x[1];$('stats').appendChild(d)});
+    var t=$('tbl');t.innerHTML='';
+    var hr=t.createTHead().insertRow();
+    COLS.concat([['','']]).forEach(function(c){var th=document.createElement('th');th.textContent=c[1];hr.appendChild(th)});
+    var tb=t.createTBody();
+    if(!shown.length){var tr=tb.insertRow(),td=tr.insertCell();td.colSpan=COLS.length+1;td.textContent=rows.length?'Nicio potrivire.':'Încă nu s-a înscris nimeni.';return}
+    shown.forEach(function(r){
+      var tr=tb.insertRow();
+      COLS.forEach(function(c){var td=tr.insertCell(),v=r[c[0]];
+        if(c[0]==='createdAt'&&v){var dt=new Date(v);v=isNaN(dt)?v:dt.toLocaleString('ro-RO',{dateStyle:'short',timeStyle:'short'})}
+        if(c[0]==='message')td.className='msg';
+        td.textContent=v==null?'':v});
+      var td=tr.insertCell(),b=document.createElement('button');b.className='del';b.type='button';b.textContent='Șterge';
+      b.addEventListener('click',function(){
+        if(!confirm('Ștergi înscrierea lui '+(r.firstName||'')+' '+(r.lastName||'')+'?'))return;
+        api({action:'delete',key:key,id:r.id}).then(load);
+      });
+      td.appendChild(b);
+    });
+  }
+  $('csvBtn').addEventListener('click',function(){
+    var esc=function(v){v=String(v==null?'':v);return /[",\n;]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
+    var csv=[COLS.map(function(c){return c[1]}).join(',')].concat(rows.map(function(r){return COLS.map(function(c){return esc(r[c[0]])}).join(',')})).join('\n');
+    var a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+csv],{type:'text/csv'}));a.download='heliskydive-wishlist.csv';a.click();
   });
 })();
 </script>

@@ -1,0 +1,6 @@
+# Site-ul static stă în /public; funcția pentru wishlist în /netlify/functions.
+[build]
+  publish = "public"
+
+[functions]
+  directory = "netlify/functions"
