@@ -6,6 +6,7 @@ import { getStore } from "@netlify/blobs";
 const FIELDS = [
   "lastName", "firstName", "email", "phone", "city",
   "funjump", "funjumpCount", "funjumpStay", "funjumpStayCount",
+  "licence", "jumpsLogged",
   "tandem", "tandemStay", "companionFlight", "companionFlights",
   "companion", "companions", "event", "message", "consent",
 ];

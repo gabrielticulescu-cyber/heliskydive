@@ -219,6 +219,9 @@ h3{font:800 clamp(1.8rem,3vw,2.6rem)/1 var(--display);text-transform:uppercase}
 .form legend{font-weight:600;padding:0 6px}
 .opt{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);font-weight:500}
 .opt:last-of-type{border-bottom:0}
+.jumper{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:4px 0 16px;border-bottom:1px solid rgba(255,255,255,.12)}
+.jumper[hidden]{display:none}
+@media (max-width:560px){.jumper{grid-template-columns:1fr}}
 .opt input[type=checkbox]{width:20px;height:20px;accent-color:var(--canopy);padding:0}
 .opt small{display:block;font-weight:400;opacity:.75;font-size:.85rem}
 .opt .qty{display:flex;align-items:center;gap:8px;font-size:.85rem;opacity:.9}
@@ -230,6 +233,14 @@ h3{font:800 clamp(1.8rem,3vw,2.6rem)/1 var(--display);text-transform:uppercase}
 .status{grid-column:1/-1;font-weight:600;min-height:1.4em}
 .status.err{color:var(--canopy-soft)}
 @media (max-width:860px){.wish .wrap{grid-template-columns:1fr}.form{grid-template-columns:1fr}}
+
+/* ---------- landing (0 m) ---------- */
+.landing{position:relative;min-height:92svh;display:flex;align-items:flex-end;padding:0 var(--gutter) clamp(48px,8vh,96px);color:#fff;overflow:hidden;background:#1a0f08 url(media/landing.jpg) center/cover}
+.landing video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.landing::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,38,25,1) 0%,rgba(14,38,25,0) 22%,rgba(20,10,4,0) 55%,rgba(14,38,25,.9) 100%)}
+.landing-in{position:relative;z-index:2;max-width:1280px;width:100%;margin:0 auto}
+.landing .zero{font:900 clamp(5rem,16vw,15rem)/.8 var(--display);color:#FFB36B;letter-spacing:-.02em}
+.landing h2{font-size:clamp(2.2rem,5vw,4.6rem);margin:1rem 0 2rem;max-width:16ch}
 
 /* ---------- footer ---------- */
 footer{background:var(--fir);color:var(--mist);padding:40px var(--gutter);border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:.9rem}
@@ -272,6 +283,7 @@ dialog.admin::backdrop{background:rgba(14,38,25,.75)}
 .admin .status.err{color:#b0124f}
 
 @media (prefers-reduced-motion: reduce){
+  .landing video{display:none}
   html{scroll-behavior:auto}
   .drop-in span{animation:none;transform:none;opacity:1}
   .hero video{display:none}
@@ -302,8 +314,8 @@ dialog.admin::backdrop{background:rgba(14,38,25,.75)}
 </div>
 
 <header class="hero" id="top">
-  <video autoplay muted loop playsinline poster="media/poster.jpg" aria-label="Skydiver hanging from a helicopter skid, then falling over the Carpathian foothills">
-    <source src="media/hero.mp4" type="video/mp4">
+  <video autoplay muted loop playsinline poster="media/poster.jpg" aria-label="A skydiver hangs from the helicopter skid, lets go and falls away over the Carpathian foothills">
+    <source src="media/hero.mp4?v=2" type="video/mp4">
   </video>
   <div class="hero-inner">
     <h1 class="drop-in"><span>Jump into</span><span>the wild</span><span>Carpathians</span></h1>
@@ -498,6 +510,16 @@ dialog.admin::backdrop{background:rgba(14,38,25,.75)}
         <legend>What would you like to do?</legend>
         <label class="opt"><input type="checkbox" value="da" name="Fun jump" data-k="funjump"><span>Fun jump<small>Licensed skydivers</small></span><span class="qty">Jumps <input type="number" name="Fun jump – număr salturi" data-k="funjumpCount" min="1" max="99" value="1" aria-label="Number of fun jumps"></span></label>
         <label class="opt"><input type="checkbox" value="da" name="Fun jump + cazare 1 noapte" data-k="funjumpStay"><span>Fun jump + 1-night stay<small>Licensed skydivers</small></span><span class="qty">Jumps <input type="number" name="Fun jump + cazare – număr salturi" data-k="funjumpStayCount" min="1" max="99" value="1" aria-label="Number of fun jumps with stay"></span></label>
+        <div class="jumper" id="jumperInfo" hidden>
+          <label>Licence
+            <select name="Licență" data-k="licence">
+              <option value="">Choose</option>
+              <option>A</option><option>B</option><option>C</option><option>D</option>
+              <option value="Other">Other / foreign licence</option>
+            </select>
+          </label>
+          <label>Jumps in your logbook<input type="number" name="Salturi la activ" data-k="jumpsLogged" min="0" max="99999" inputmode="numeric" placeholder="e.g. 250"></label>
+        </div>
         <label class="opt"><input type="checkbox" value="da" name="Tandem" data-k="tandem"><span>Tandem<small>No experience needed</small></span><span></span></label>
         <label class="opt"><input type="checkbox" value="da" name="Tandem + cazare 1 noapte" data-k="tandemStay"><span>Tandem + 1-night stay<small>No experience needed</small></span><span></span></label>
         <label class="opt"><input type="checkbox" value="da" name="Însoțitori la zbor" data-k="companionFlight"><span>Companion, helicopter flight<small>Flies along and watches you jump</small></span><span class="qty">People <input type="number" name="Însoțitori la zbor – persoane" data-k="companionFlights" min="1" max="20" value="1" aria-label="Number of companions on the flight"></span></label>
@@ -506,12 +528,21 @@ dialog.admin::backdrop{background:rgba(14,38,25,.75)}
       <label class="full">Preferred event or dates
         <select name="Eveniment dorit" data-k="event" id="eventSel"><option value="">Any date</option></select>
       </label>
-      <label class="full">Anything else<textarea name="Mesaj" data-k="message" placeholder="Licence and number of jumps, weight for tandem, where you're coming from"></textarea></label>
+      <label class="full">Anything else<textarea name="Mesaj" data-k="message" placeholder="Weight for tandem, where you're coming from, anything we should know"></textarea></label>
       <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
       <label class="consent"><input type="checkbox" value="da" name="Acord date personale" data-k="consent" required><span>I agree that HELISKYDIVE keeps these details to contact me about jumps and events. I can ask for them to be deleted at any time.</span></label>
       <button class="btn" type="submit">Join the wishlist</button>
       <p class="status" id="wishStatus" role="status" aria-live="polite"></p>
     </form>
+  </div>
+</section>
+
+<section class="landing" aria-label="Landing">
+  <video autoplay muted loop playsinline poster="media/landing.jpg" aria-hidden="true"><source src="media/landing.mp4" type="video/mp4"></video>
+  <div class="landing-in">
+    <p class="zero">0 m</p>
+    <h2>Back on earth.<br>Already planning the next one.</h2>
+    <a class="btn" href="#wishlist">Join the wishlist</a>
   </div>
 </section>
 </main>
@@ -606,8 +637,9 @@ var API='/api/wishlist';
 function fld(f,k){return f.querySelector('[data-k="'+k+'"]')}
 function entryOf(f){
   var o={};
-  ['lastName','firstName','email','phone','city','event','message'].forEach(function(k){o[k]=fld(f,k).value.trim()});
+  ['lastName','firstName','email','phone','city','event','message','licence','jumpsLogged'].forEach(function(k){o[k]=fld(f,k).value.trim()});
   ['funjump','funjumpStay','tandem','tandemStay','companionFlight','companion','consent'].forEach(function(k){o[k]=fld(f,k).checked?'da':''});
+  if(!(o.funjump||o.funjumpStay)){o.licence='';o.jumpsLogged=''}
   o.funjumpCount=o.funjump?fld(f,'funjumpCount').value:'';
   o.funjumpStayCount=o.funjumpStay?fld(f,'funjumpStayCount').value:'';
   o.companionFlights=o.companionFlight?fld(f,'companionFlights').value:'';
@@ -619,6 +651,7 @@ function checkEntry(o){
   if(!o.lastName||!o.firstName||!o.email||!o.phone||!o.city)return 'Please fill in name, email, phone and city.';
   if(!/^\S+@\S+\.\S+$/.test(o.email))return 'Please check the email address.';
   if(!(o.funjump||o.funjumpStay||o.tandem||o.tandemStay||o.companion||o.companionFlight))return 'Choose at least one option.';
+  if((o.funjump||o.funjumpStay)&&(!o.licence||o.jumpsLogged===''))return 'For fun jumps, tell us your licence and how many jumps you have.';
   if(!o.consent)return 'Please tick the box so we can keep your details.';
   return '';
 }
@@ -631,6 +664,7 @@ function sendForms(f,o){
   [['funjump','funjumpCount'],['funjumpStay','funjumpStayCount'],['companion','companions'],['companionFlight','companionFlights']].forEach(function(x){
     if(!o[x[0]])p.delete(fld(f,x[1]).name);
   });
+  if(!(o.funjump||o.funjumpStay)){p.delete(fld(f,'licence').name);p.delete(fld(f,'jumpsLogged').name)}
   p.set('subject','Wishlist HELISKYDIVE: '+o.firstName+' '+o.lastName);
   return fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()})
     .then(function(r){if(!r.ok)throw r;return {ok:true}});
@@ -654,11 +688,19 @@ function sendForms(f,o){
   });
 })();
 
+(function(){
+  var f=document.getElementById('wishForm'), box=document.getElementById('jumperInfo');
+  function sync(){box.hidden=!(fld(f,'funjump').checked||fld(f,'funjumpStay').checked)}
+  f.addEventListener('change',sync);f.addEventListener('reset',function(){setTimeout(sync)});
+  document.querySelectorAll('[data-pick]').forEach(function(a){a.addEventListener('click',function(){setTimeout(sync)})});
+  sync();
+})();
+
 /* ===== Zona echipei (lacătul din subsol) ===== */
 (function(){
   var dlg=document.getElementById('admin'), $=function(id){return document.getElementById(id)}, key='', rows=[];
   var COLS=[['createdAt','Data'],['lastName','Nume'],['firstName','Prenume'],['email','Email'],['phone','Telefon'],['city','Oraș / Comună'],
-    ['funjump','Fun jump'],['funjumpCount','Salturi'],['funjumpStay','FJ + cazare'],['funjumpStayCount','Salturi'],
+    ['funjump','Fun jump'],['funjumpCount','Salturi'],['funjumpStay','FJ + cazare'],['funjumpStayCount','Salturi'],['licence','Licență'],['jumpsLogged','Salturi la activ'],
     ['tandem','Tandem'],['tandemStay','Tandem + cazare'],['companionFlights','Însoțitori zbor'],['companions','Însoțitori cazare'],
     ['event','Eveniment'],['message','Mesaj']];
   var ERR={wrong_key:'Parolă greșită.',locked:'Prea multe încercări greșite. Reîncercați peste 15 minute.',
